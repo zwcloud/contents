@@ -1,5 +1,17 @@
-import _ from 'lodash';
+import difference from 'lodash/difference';
+import assign from 'lodash/assign';
+import map from 'lodash/map';
+import forEach from 'lodash/forEach';
 import Sister from 'sister';
+
+class _ {
+  static difference = difference;
+  static assign = assign;
+  static map = map;
+  static forEach = forEach;
+}
+
+const global = window;
 
 /**
  * @param {Object} config
