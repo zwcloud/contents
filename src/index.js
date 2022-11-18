@@ -242,6 +242,21 @@ Contents.uniqueID = (inputId, existingIDs) => {
   return assignedId;
 };
 
+/** Get hash of a string, support UTF8 characters
+ * @param {string} str
+ * @return {string} hashed value
+ */
+function StringHash(str) {
+  var hash = 0, i, chr, len;
+  if (str.length === 0) return hash;
+  for (i = 0, len = str.length; i < len; i++) {
+    chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
 /**
  * Formats text into an ID/anchor safe value.
  *
@@ -250,20 +265,27 @@ Contents.uniqueID = (inputId, existingIDs) => {
  * @return {string}
  */
 Contents.formatId = (str) => {
-  return str
-    .toLowerCase()
-    .replace(/[ãàáäâ]/g, 'a')
-    .replace(/[ẽèéëê]/g, 'e')
-    .replace(/[ìíïî]/g, 'i')
-    .replace(/[õòóöô]/g, 'o')
-    .replace(/[ùúüû]/g, 'u')
-    .replace(/[ñ]/g, 'n')
-    .replace(/[ç]/g, 'c')
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9\-_]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .replace(/^[^a-z]+/g, '');
+  if (!str.match(/^[a-z]+[a-z0-9\-_:\.]*$/)) {
+    return "hash" + StringHash(str);
+  }
+  else{
+    str = str
+      .toLowerCase()
+      .replace(/[ãàáäâ]/g, 'a')
+      .replace(/[ẽèéëê]/g, 'e')
+      .replace(/[ìíïî]/g, 'i')
+      .replace(/[õòóöô]/g, 'o')
+      .replace(/[ùúüû]/g, 'u')
+      .replace(/[ñ]/g, 'n')
+      .replace(/[ç]/g, 'c')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9\-_]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      //.replace(/^[^a-z]+/g, '')
+      ;
+    return str;
+  }
 };
 
 /**
