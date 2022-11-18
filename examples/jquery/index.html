@@ -5,12 +5,13 @@
 
     <script src="./../../node_modules/jquery/dist/jquery.js"></script>
 
-    <script src="./../../dist/contents.js"></script>
+    <script type='module' src="./../../dist/contents.js"></script>
 
-    <script>
-    $(function () {
-        $('#contents').append(gajus.Contents().list());
-    });
+    <script type="module">
+        import Contents from "../../dist/contents.js";
+        $(function () {
+            $('#contents').append(Contents().list());
+        });
     </script>
 </head>
 <body>
