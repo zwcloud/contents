@@ -4,7 +4,7 @@ async function build() {
         {
             entryPoints: ["src/index.js"],
             bundle: true,
-            minify: false,
+            minify: true,
             target: "es6",
             format: 'esm',
             sourcemap: true,
