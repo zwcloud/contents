@@ -10,15 +10,8 @@
   },
   "description": "Table of contents generator.",
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "chai": "^4.1.2",
-    "eslint-config-canonical": "^12.0.0",
-    "gitdown": "^2.5.3",
-    "jsdom": "^12.0.0",
-    "mocha": "^5.2.0"
+    "esbuild": "^0.15.10",
+    "jquery": "^3.6.1"
   },
   "keywords": [
     "table of contents",
@@ -33,10 +26,9 @@
     "url": "http://github.com/gajus/contents.git"
   },
   "scripts": {
-    "build": "rm -fr ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files --source-maps",
+    "build": "node build.js",
     "generate-readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "lint": "eslint ./src",
-    "test": "mocha --require @babel/register"
+    "lint": "eslint ./src"
   },
   "title": "Contents",
   "version": "5.0.0"
